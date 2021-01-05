@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1
+  # Take a look at pods created and match the label app: moderation - the key and value are arbitrary
+  selector:
+    matchLabels:
+      app: moderation
+  # Describes the pod!
+  template:
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: sjoedwards1/moderation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv
+spec:
+  selector:
+  # Maps to the label above
+    app: moderation
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003
+      targetPort: 4003

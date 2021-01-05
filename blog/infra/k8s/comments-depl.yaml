@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  replicas: 1
+  # Take a look at pods created and match the label app: comments - the key and value are arbitrary
+  selector:
+    matchLabels:
+      app: comments
+  # Describes the pod!
+  template:
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers:
+        - name: comments
+          image: sjoedwards1/comments
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-srv
+spec:
+  selector:
+  # Maps to the label above
+    app: comments
+  ports:
+    - name: comments
+      protocol: TCP
+      port: 4001
+      targetPort: 4001

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-depl
+spec:
+  replicas: 1
+  # Take a look at pods created and match the label app: query - the key and value are arbitrary
+  selector:
+    matchLabels:
+      app: query
+  # Describes the pod!
+  template:
+    metadata:
+      labels:
+        app: query
+    spec:
+      containers:
+        - name: query
+          image: sjoedwards1/query
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-srv
+spec:
+  selector:
+  # Maps to the label above
+    app: query
+  ports:
+    - name: query
+      protocol: TCP
+      port: 4002
+      targetPort: 4002

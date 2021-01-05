@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  type: NodePort
+  selector:
+    # Reference the posts-depl.yaml, will try and find services with a name of app:posts
+    # A bit like a html class
+    app: posts
+  ports:
+    - name: posts
+      # Transmission Control Protocol
+      protocol: TCP
+      # NodePort has its own port
+      port: 4000
+      # Ultimate port that our application is listening on which the node port will redirect traffic to
+      targetPort: 4000
