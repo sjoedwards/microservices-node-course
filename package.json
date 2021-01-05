@@ -1,0 +1,27 @@
+{
+  "name": "microservices-node-course",
+  "version": "1.0.0",
+  "description": "React Node Microservices K8s",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjoedwards/microservices-node-course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjoedwards/microservices-node-course/issues"
+  },
+  "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "prettier": "^2.2.1"
+  },
+  "homepage": "https://github.com/sjoedwards/microservices-node-course#readme"
+}
