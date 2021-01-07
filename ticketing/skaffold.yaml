@@ -8,17 +8,33 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
+  #Local config
   local:
     # Don't push to dockerhub when re-building
     push: false
   artifacts:
-    # Artifact is something skaffold needs to maintain
-    - image: sjoedwards1/auth
-      context: auth
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          # Mount this file if it exists, or rebuild the entire image
-          - src: 'src/**/*.ts'
-            dest: .
+  - image: sjoedwards1/auth
+    context: auth
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        # Mount this file if it exists, or rebuild the entire image
+        - src: 'src/**/*.ts'
+          dest: .
+
+# # GCP Config
+# build:
+#   googleCloudBuild:
+#     projectId: ticketing-dev-301012
+#   local:
+#   push: true
+#   artifacts:
+#   - image: us.gcr.io/ticketing-dev-301012/auth
+#         context: auth
+#         docker:
+#           dockerfile: Dockerfile
+#         sync:
+#           manual:
+#             - src: 'src/**/*.ts'
+#               dest: .
