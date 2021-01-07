@@ -14,6 +14,23 @@ Add ingress-NGINX
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
+## Run skaffold k8s setup
+
+Install Skaffold
+
+```
+brew install skaffold
+```
+
+Run Skaffold
+
+```
+cd blog
+skaffold dev
+```
+
+## Manual K8s setup
+
 Apply the service (NodePort) & deployments:
 
 ```

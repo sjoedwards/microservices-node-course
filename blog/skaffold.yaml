@@ -1,0 +1,69 @@
+# Skaffold is a tool that runs outside of the cluster
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    # When you change a file, its going to reapply the files
+    # When skaffold is stopped, all the resources wil be removed
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    # Don't push to dockerhub when re-building
+    push: false
+  artifacts:
+    # Artifact is something skaffold needs to maintain
+    - image: sjoedwards1/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: 'src/**/*.js'
+            dest: .
+    - image: sjoedwards1/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: '*.js'
+            dest: .
+    - image: sjoedwards1/eventbus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: '*.js'
+            dest: .
+    - image: sjoedwards1/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: '*.js'
+            dest: .
+    - image: sjoedwards1/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: '*.js'
+            dest: .
+    - image: sjoedwards1/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: '*.js'
+            dest: .
