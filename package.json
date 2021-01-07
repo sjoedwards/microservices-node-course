@@ -27,5 +27,8 @@
     "prettier": "^2.2.1"
   },
   "homepage": "https://github.com/sjoedwards/microservices-node-course#readme",
-  "dependencies": {}
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }

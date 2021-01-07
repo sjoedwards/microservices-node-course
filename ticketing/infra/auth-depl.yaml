@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  # Tells deployment how to find the pods to create
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        # Can be anything - just used for loggings
+        - name: auth
+          image: sjoedwards1/auth
+---
+# Define the clusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  # Don't define type - the default is the clusterIP service
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
