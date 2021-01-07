@@ -1,0 +1,24 @@
+# Skaffold is a tool that runs outside of the cluster
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    # When you change a file, its going to reapply the files
+    # When skaffold is stopped, all the resources wil be removed
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    # Don't push to dockerhub when re-building
+    push: false
+  artifacts:
+    # Artifact is something skaffold needs to maintain
+    - image: sjoedwards1/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Mount this file if it exists, or rebuild the entire image
+          - src: 'src/**/*.ts'
+            dest: .
