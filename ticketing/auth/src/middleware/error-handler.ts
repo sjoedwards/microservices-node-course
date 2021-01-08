@@ -10,12 +10,17 @@ export const errorHandler = (
 ) => {
   // Creating common response structure
   if (err instanceof RequestValidationError) {
+    const formattedErrors = err.errors.map((error) => {
+      return { message: error.msg, field: error.param };
+    });
+    return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 
   if (err instanceof DatabaseConnectionError) {
-    console.log("DB connection error");
+    return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
+
   res.status(400).send({
-    message: err.message,
+    errors: [{ message: "Something went wrong" }],
   });
 };
