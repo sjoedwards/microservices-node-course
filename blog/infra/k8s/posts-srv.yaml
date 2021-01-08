@@ -12,7 +12,7 @@ spec:
     - name: posts
       # Transmission Control Protocol
       protocol: TCP
-      # NodePort has its own port
+      # Service has its own port
       port: 4000
       # Ultimate port that our application is listening on which the node port will redirect traffic to
       targetPort: 4000
