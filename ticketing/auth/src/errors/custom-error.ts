@@ -5,8 +5,8 @@ import { ErrorResponse } from "./../types/index";
 abstract class CustomError extends Error {
   abstract statusCode: number;
 
-  constructor() {
-    super();
+  constructor(message: string) {
+    super(message);
     Object.setPrototypeOf(this, CustomError.prototype);
   }
 

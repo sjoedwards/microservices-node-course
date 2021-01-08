@@ -1,5 +1,7 @@
+import { NotFoundError } from "./errors/not-found-error";
 import { errorHandler } from "./middleware/error-handler";
 import express from "express";
+import "express-async-errors";
 import { json } from "body-parser";
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
@@ -13,6 +15,13 @@ app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+
+// Only works because we've got express-async-errors imported, otherwise would need to pass
+// NotFoundError() to next()
+app.all("*", async () => {
+  throw new NotFoundError();
+});
+
 app.use(errorHandler);
 
 app.listen(3000, () => {
