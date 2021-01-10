@@ -17,6 +17,8 @@ app.set("trust proxy", true);
 
 // Create the session
 app.use(cookieSession({ signed: false, secure: true }));
+
+// Parse the body
 app.use(json());
 
 app.use(currentUserRouter);

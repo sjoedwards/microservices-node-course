@@ -1,10 +1,9 @@
-import { DatabaseConnectionError } from "./../errors/database-connection-error";
-import { RequestValidationError } from "./../errors/request-validation-error";
 import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { body } from "express-validator";
 import { User } from "../models/user";
 import BadRequestError from "../errors/bad-request-error";
 import jwt from "jsonwebtoken";
+import { validateRequest } from "../middleware/validate-request";
 
 const router = express.Router();
 
@@ -17,13 +16,9 @@ router.post(
       .isLength({ min: 4, max: 20 })
       .withMessage("Password must be within 4 and 20"),
   ],
+  // Middleware to validate the request!
+  validateRequest,
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
-
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -46,7 +41,7 @@ router.post(
       process.env.JWT_KEY
     );
     // store on the session object
-    req.session.jwt = {
+    req.session = {
       jwt: userJwt,
     };
 

@@ -37,8 +37,8 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
     toJSON: {
       // This allows you to change the document and returned value when sending data back
       transform(doc, ret) {
-        ret.id = ret.__id;
-        delete ret.__id;
+        ret.id = ret._id;
+        delete ret._id;
         delete ret.__v;
         delete ret.password;
       },
