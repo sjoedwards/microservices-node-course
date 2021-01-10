@@ -4,6 +4,7 @@ import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import { User } from "../models/user";
 import BadRequestError from "../errors/bad-request-error";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -33,6 +34,21 @@ router.post(
 
     const user = User.build({ email, password });
     await user.save();
+    // Generate JWT
+
+    // I STRONGLY DISAGREE WITH STORING EMAIL ON A JWT - ITS PII AND SHOULD BE ENCRYPTED AT REST
+    // could get around this by encrypting the cookie contents or the JWT payload
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      process.env.JWT_KEY
+    );
+    // store on the session object
+    req.session.jwt = {
+      jwt: userJwt,
+    };
 
     res.status(201).send(user);
   }

@@ -17,6 +17,12 @@ spec:
         # Can be anything - just used for loggings
         - name: auth
           image: sjoedwards1/auth
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                  secretKeyRef:
+                    name: jwt-secret
+                    key: JWT_KEY
 ---
 # Define the clusterIP
 apiVersion: v1
