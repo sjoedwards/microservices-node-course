@@ -6,7 +6,7 @@ export const errorHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   console.log(err);
   // Can do this because its an abstract class and not an interface - it gets transpiled to JS
   if (err instanceof CustomError)

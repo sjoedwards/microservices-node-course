@@ -1,3 +1,4 @@
+import { Password } from "./../services/password";
 import mongoose from "mongoose";
 
 // An interface describing the properties that are
@@ -30,6 +31,16 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>({
     type: String,
     required: true,
   },
+});
+
+userSchema.pre("save", async function (done) {
+  // This is the document that is being saved
+
+  // Only re-hash the password if this user is attempting to alter the password
+  if (this.isModified("password")) {
+    const hashed = await Password.toHash(this.get("password"));
+    this.set("password", hashed);
+  }
 });
 
 userSchema.statics.build = (attrs: UserAttrs) => {
