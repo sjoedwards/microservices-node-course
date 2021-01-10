@@ -26,7 +26,7 @@ router.post(
     // Want to give minimal detail as possible as to why sign in didnt succeed
 
     if (!existingUser) {
-      throw new BadRequestError("Invalid credentials +1");
+      throw new BadRequestError("Invalid credentials");
     }
 
     const passwordsMatch = await Password.compare(
