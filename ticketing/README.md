@@ -16,6 +16,15 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 ## Run skaffold k8s setup
 
+Populate a .env file based off the .env.example file
+
+Run secrets loader
+
+```
+cd ticketing/auth
+sh ./secrets.sh
+```
+
 Install Skaffold
 
 ```
