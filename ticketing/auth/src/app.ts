@@ -15,7 +15,9 @@ const app = express();
 app.set("trust proxy", true);
 
 // Create the session
-app.use(cookieSession({ signed: false, secure: true }));
+app.use(
+  cookieSession({ signed: false, secure: process.env.NODE_ENV !== "test" })
+);
 
 // Parse the body
 app.use(json());
