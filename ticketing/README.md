@@ -38,6 +38,8 @@ cd ticketing
 skaffold dev
 ```
 
+Should be able to access application on https://ticketing.dev
+
 # GCloud kubectl k8 setup
 
 Relies on the cluster being deployed in GKS
