@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
 
-const Signup = () => {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { doRequest, errors } = useRequest({
-    url: "/api/users/signup",
+    url: "/api/users/signin",
     method: "post",
     body: {
       email,
@@ -50,4 +50,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignIn;

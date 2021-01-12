@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default (req) => {
+const buildClient = (req) => {
   if (typeof window === "undefined") {
     return axios.create({
       // Can only target ClusterIP directly if resources are in the same namespace
@@ -16,3 +16,5 @@ export default (req) => {
     });
   }
 };
+
+export default buildClient;
