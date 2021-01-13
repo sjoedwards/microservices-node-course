@@ -1,0 +1,23 @@
+{
+  "name": "@sjoedwards/common",
+  "version": "1.0.1",
+  "description": "",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "clean": "del ./build/*",
+    "build": "yarn run clean && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.1"
+  }
+}

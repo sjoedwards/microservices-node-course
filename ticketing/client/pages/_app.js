@@ -3,13 +3,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import PropTypes from "prop-types";
 import buildClient from "../api/buildClient";
 import App from "next/app";
+import Header from "../components/header";
 
 // _app.js is where we add anything globally
-const TicketingApp = ({ Component, pageProps, globalProps }) => {
+const TicketingApp = ({ Component, pageProps, currentUser }) => {
   return (
     <div className="container">
-      <h1>Header</h1>
-      <Component {...pageProps} {...globalProps} />
+      <Header currentUser={currentUser} />
+      <Component {...pageProps} currentUser={currentUser} />
     </div>
   );
 };
@@ -17,7 +18,7 @@ const TicketingApp = ({ Component, pageProps, globalProps }) => {
 TicketingApp.propTypes = {
   Component: PropTypes.func,
   pageProps: PropTypes.object,
-  globalProps: PropTypes.object,
+  currentUser: PropTypes.object,
 };
 export default TicketingApp;
 
@@ -35,5 +36,5 @@ TicketingApp.getInitialProps = async (appContext) => {
 
   const globalProps = { ...data };
 
-  return { ...appProps, globalProps };
+  return { ...appProps, ...globalProps };
 };

@@ -2,3 +2,4 @@
 **/.DSStore
 **/.env
 **/.next
+**/build
