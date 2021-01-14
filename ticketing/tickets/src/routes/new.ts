@@ -24,9 +24,8 @@ router.post(
       userId: req.currentUser.id,
     });
 
-    // await ticket.save();
-    console.log("ping");
-    res.status(201).send({});
+    await ticket.save();
+    res.status(201).send({ ticket });
   }
 );
 

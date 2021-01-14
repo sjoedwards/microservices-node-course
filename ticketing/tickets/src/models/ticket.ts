@@ -37,10 +37,11 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
     },
   }
 );
-const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs);
 };
+// This has to go below the schema, otherwise the static methods are not included
+const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
 
 export { Ticket };

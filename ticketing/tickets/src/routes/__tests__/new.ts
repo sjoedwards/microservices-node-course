@@ -54,13 +54,14 @@ test("Creates a ticket with valid inputs", async () => {
   expect(ticketsPre).toHaveLength(0);
 
   const title = "asdas";
+  const price = 20;
   await request(app)
     .post("/api/tickets")
     .set("Cookie", global.signin())
-    .send({ title, price: 20 })
+    .send({ title, price })
     .expect(201);
 
-  const ticketsPost = await Ticket.find({});
+  const ticketsPost = await Ticket.find({ title, price });
 
   expect(ticketsPost).toHaveLength(1);
 });
