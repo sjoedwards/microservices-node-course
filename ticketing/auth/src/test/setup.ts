@@ -45,6 +45,7 @@ afterAll(async () => {
   await mongoose.connection.close;
 });
 
+// Define a global function that creates a test account
 global.signup = async () => {
   const email = "test@test.com";
   const password = "password";

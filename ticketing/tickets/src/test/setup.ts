@@ -44,14 +44,3 @@ afterAll(async () => {
   await mongo.stop();
   await mongoose.connection.close;
 });
-
-global.signup = async () => {
-  const email = "test@test.com";
-  const password = "password";
-
-  const response = await request(app)
-    .post("/api/users/signup")
-    .send({ email, password });
-
-  return response.get("Set-Cookie");
-};
