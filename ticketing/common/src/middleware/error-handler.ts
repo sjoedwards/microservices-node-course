@@ -8,8 +8,11 @@ export const errorHandler = (
   next: NextFunction
 ): void => {
   // Can do this because its an abstract class and not an interface - it gets transpiled to JS
-  if (err instanceof CustomError)
+  if (err instanceof CustomError) {
     res.status(err.statusCode).send({
       errors: err.serializeErrors(),
     });
+  } else {
+    next(err);
+  }
 };
