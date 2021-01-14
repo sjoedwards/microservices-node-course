@@ -14,6 +14,6 @@ export const errorHandler = (
     });
   } else {
     console.error(err);
-    next(err);
+    res.status(400).send([{ message: "An unknown error occured" }]);
   }
 };

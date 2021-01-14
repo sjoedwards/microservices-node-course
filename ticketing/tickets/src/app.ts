@@ -17,6 +17,7 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
+
 // Because we've imported express-async-errors, that means we can throw errors async
 app.all("*", async (req: Request, res: Response) => {
   throw new NotFoundError();
