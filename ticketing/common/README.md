@@ -1,6 +1,6 @@
 # Common
 
-To release a new minor version
+## To release a new minor version
 
 - Commit to master
 - Checkout master (with a clean working tree)
@@ -13,3 +13,12 @@ Will do a few things:
 - yarn postversion: pushes tag and tag commit
 - yarn run build: Builds the package
 - npm run publish: Publishes the package to npm using the latest tag (i.e. the one just created)
+
+## To locally develop in other applications
+
+```
+cd common
+npm link
+cd ../[module]
+npm link @sjoedwards/common
+```
