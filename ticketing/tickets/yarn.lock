@@ -516,10 +516,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sjoedwards/common@^1.0.26":
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.26.tgz#62d70aa3ae55909c428afca585093603aff639ef"
-  integrity sha512-gYsD5yeizPqLUMo3HXmBD3AUt79rREv43GJCvhOxLDUX1LKdY/3ZdwmMX+UapXjKlsiVT1lyVIN3YNF4zs5aZA==
+"@sjoedwards/common@^1.0.27":
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.27.tgz#5c5c8009ca25079b0028d4ac28a3d593421d5d34"
+  integrity sha512-yOOdAd1HpY+I8lRAiWkY492RXj89d8+DZg/RhFbep2qcUVUkGYRH6zzcMn4rSoeETgEOqIoMWeD3pL6Fr+BRbw==
   dependencies:
     "@types/cookie-session" "^2.0.42"
     "@types/express" "^4.17.11"

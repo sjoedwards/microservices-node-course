@@ -49,7 +49,7 @@ afterAll(async () => {
 // This is not really 'signing in', its more generating
 // the cookie that the client would expect to send in the request
 global.signin = () => {
-  const id = "test";
+  const id = new mongoose.Types.ObjectId().toHexString();
   const email = "test@test.com";
   const userJwt = jwt.sign(
     {

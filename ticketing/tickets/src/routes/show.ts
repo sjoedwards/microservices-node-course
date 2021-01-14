@@ -1,4 +1,4 @@
-import { NotFoundError } from "./../../../common/src/errors/not-found-error";
+import { NotFoundError } from "@sjoedwards/common";
 import { Request, Response, Router } from "express";
 import { Ticket } from "../models/ticket";
 
