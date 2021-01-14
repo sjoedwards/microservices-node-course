@@ -1,6 +1,6 @@
 {
   "name": "@sjoedwards/common",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "echo \"Clean and Build Package\" \n yarn run clean && tsc",
-    "pub": "yarn version --patch && yarn run build && npm publish --access public",
+    "pub": "yarn version --patch && yarn run build && yarn npm publish --access public",
     "postversion": "git push --tags"
   },
   "keywords": [],
