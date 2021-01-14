@@ -16,6 +16,8 @@ Will do a few things:
 
 ## To locally develop in other applications
 
+Warning: Won't work inside kubernetes clusters / docker containers
+
 ```
 cd common
 npm link
