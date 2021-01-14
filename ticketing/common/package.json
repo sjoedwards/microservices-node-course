@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "echo \"Clean and Build Package\" \n yarn run clean && tsc",
-    "pub": "yarn lint && yarn version --patch && yarn run build && npm publish --access public",
+    "pub": "yarn lint && yarn run build && yarn version --patch && npm publish --access public",
     "postversion": "git push && git push --tags",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "yarn run lint --fix"
