@@ -1,6 +1,6 @@
 {
   "name": "@sjoedwards/common",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -10,10 +10,9 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "yarn run clean && tsc",
-    "pub": "yarn version --patch && yarn run build && yarn publish",
-    "preversion": "echo preversion",
-    "version": "echo version",
-    "postversion": "echo Pushing Tags...\n git push --tags"
+    "pub": "yarn publish --access public --new-version latest",
+    "postpublish": "echo Pushing Tags...\n git push --tags",
+    "version": "echo version"
   },
   "keywords": [],
   "author": "",
