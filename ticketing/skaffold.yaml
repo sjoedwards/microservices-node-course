@@ -22,6 +22,15 @@ build:
         # Mount this file if it exists, or rebuild the entire image
         - src: 'src/**/*.ts'
           dest: .
+  - image: sjoedwards1/tickets
+    context: auth
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        # Mount this file if it exists, or rebuild the entire image
+        - src: 'src/**/*.ts'
+          dest: .
   - image: sjoedwards1/client
     context: client
     docker:
