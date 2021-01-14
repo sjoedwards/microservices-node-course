@@ -13,6 +13,7 @@ export const errorHandler = (
       errors: err.serializeErrors(),
     });
   } else {
+    console.error(err);
     next(err);
   }
 };
