@@ -1,4 +1,4 @@
-import { ErrorResponse } from "./../types/index";
+import { ErrorResponse } from "../types/index";
 import { ValidationError } from "express-validator";
 import { CustomError } from "./custom-error";
 

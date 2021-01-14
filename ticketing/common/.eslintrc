@@ -8,6 +8,6 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "plugin:promise/recommended"
+    "plugin:promise/recommended",
   ]
 }

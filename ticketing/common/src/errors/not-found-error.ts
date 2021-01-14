@@ -1,4 +1,4 @@
-import { ErrorResponse } from "../types/index";
+import { ErrorResponse } from "../types";
 import { CustomError } from "./custom-error";
 
 export class NotFoundError extends CustomError {

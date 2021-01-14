@@ -28,6 +28,11 @@ export const currentUser = (
     return next();
   }
 
+  // TODO Need to dependency inject this
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT key is undefined!");
+  }
+
   try {
     const payload = jwt.verify(
       req.session.jwt,
