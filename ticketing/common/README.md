@@ -2,6 +2,9 @@
 
 To release a new minor version
 
+- Commit to master
+- Checkout master (with a clean working tree)
+- npm login
 - yarn run pub
 
 Will do a few things:
