@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import request from "supertest";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
@@ -7,7 +8,7 @@ import { app } from "../app";
 declare global {
   namespace NodeJS {
     interface Global {
-      signup(): Promise<string[]>;
+      signin(): string[];
     }
   }
 }
@@ -44,3 +45,22 @@ afterAll(async () => {
   await mongo.stop();
   await mongoose.connection.close;
 });
+
+// This is not really 'signing in', its more generating
+// the cookie that the client would expect to send in the request
+global.signin = () => {
+  const id = "test";
+  const email = "test@test.com";
+  const userJwt = jwt.sign(
+    {
+      id,
+      email,
+    },
+    process.env.JWT_KEY
+  );
+
+  const session = JSON.stringify({ jwt: userJwt });
+  const b64Session = Buffer.from(session).toString("base64");
+
+  return [`express:sess=${b64Session}`];
+};

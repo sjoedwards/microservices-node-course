@@ -517,9 +517,9 @@
     "@sinonjs/commons" "^1.7.0"
 
 "@sjoedwards/common@^1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.24.tgz#c0c9123d4e1f266b1b224d5556475f2f8854dcf8"
-  integrity sha512-2e4N3B84gRfbiDn1AEZUKDr+Bfzx5t5LKYDvCOgr5xGmXO6qz+qgff9md9d3grW0zdYaycPh9nV7aA4+0eIUfg==
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.25.tgz#190cc21ff69904c723e5077e35efc9986f998b29"
+  integrity sha512-V7JuWFRICF+j/fV+tMVADyDPZo6PAtJwBINlReIHP2M3Va0/BCvB0YRut88KIXjIgRfFkAM+tGljmcm6nq20Uw==
   dependencies:
     "@types/cookie-session" "^2.0.42"
     "@types/express" "^4.17.11"

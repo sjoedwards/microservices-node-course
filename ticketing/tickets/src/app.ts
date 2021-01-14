@@ -1,27 +1,24 @@
-import { NotFoundError, errorHandler } from "@sjoedwards/common";
-import express from "express";
+import { NotFoundError, currentUser, errorHandler } from "@sjoedwards/common";
+import cookieSession from "cookie-session";
+import express, { Response, Request } from "express";
+// Means we can throw errors inside of async functions
 import "express-async-errors";
 import { json } from "body-parser";
-import cookieSession from "cookie-session";
+import { createTicketRouter } from "./routes/new";
 
 const app = express();
-// Telling the app that even though traffic is coming from the nginx proxy, to trust it as secure
 app.set("trust proxy", true);
-
-// Create the session
+app.use(json());
 app.use(
   cookieSession({ signed: false, secure: process.env.NODE_ENV !== "test" })
 );
+app.use(currentUser);
 
-// Parse the body
-app.use(json());
-
-// Only works because we've got express-async-errors imported, otherwise would need to pass
-// NotFoundError() to next()
-app.all("*", async () => {
+app.use(createTicketRouter);
+// Because we've imported express-async-errors, that means we can throw errors async
+app.all("*", async (req: Request, res: Response) => {
   throw new NotFoundError();
 });
-
 app.use(errorHandler);
 
 export { app };
