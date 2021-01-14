@@ -1,5 +1,4 @@
-import { NotFoundError } from "./errors/not-found-error";
-import { errorHandler } from "./middleware/error-handler";
+import { NotFoundError, errorHandler } from "@sjoedwards/common";
 import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
