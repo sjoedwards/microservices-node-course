@@ -16,6 +16,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 ## Run skaffold k8s setup
 
+Need to build all of the images locally & push to docker hub once first
+
 Populate a .env file based off the .env.example file
 
 Run secrets loader
