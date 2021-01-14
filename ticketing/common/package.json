@@ -1,6 +1,6 @@
 {
   "name": "@sjoedwards/common",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -9,11 +9,11 @@
   ],
   "scripts": {
     "clean": "del ./build/*",
-    "build": "echo Clean and Build Package \n yarn run clean && tsc",
+    "build": "echo \"Clean and Build Package\" \n yarn run clean && tsc",
     "pub": "yarn version --patch && yarn run build && npm publish",
-    "preversion": "echo Version: Increment version and commit => create tag\n",
-    "postversion": "echo Post Version: Push tags to Github\n git push --tags",
-    "prepublishOnly": "echo Publishing latest version to npm",
+    "preversion": "echo \"Version: Increment version and commit => create tag\n\"",
+    "postversion": "echo \"Post Version: Push tags to Github\n\" git push --tags",
+    "prepublishOnly": "echo \"Publishing latest version to npm\"",
     "version": "echo version"
   },
   "keywords": [],
