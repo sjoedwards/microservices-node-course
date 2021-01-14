@@ -30,8 +30,15 @@ test("returns a 401 if the user does not own the ticket", async () => {
     .send({ title: "asfasf", price: 20 })
     .expect(401);
 });
-test.only("returns a 400 if the user provides an invalid title or price", async () => {
+
+// Start here - getting 400 but need a 200!
+test("returns a 400 if the user provides an invalid title or price", async () => {
   const cookie = await global.signin();
   const response = await createTicket(app, { cookie });
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({})
+    .expect(400);
 });
 test("updates the ticket given valid inputs", async () => {});

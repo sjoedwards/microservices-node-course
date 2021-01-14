@@ -26,6 +26,10 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
       type: Number,
       required: true,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   {
     toJSON: {

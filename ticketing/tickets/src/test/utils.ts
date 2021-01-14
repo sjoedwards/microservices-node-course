@@ -3,7 +3,11 @@ import request, { Test } from "supertest";
 
 export const createTicket = (
   app: Express,
-  { title, price, cookie }: { title: string; price: number; cookie: string[] }
+  {
+    title = "title",
+    price = 20,
+    cookie = global.signin(),
+  }: { title?: string; price?: number; cookie?: string[] } = {}
 ): Test =>
   request(app)
     .post("/api/tickets")
