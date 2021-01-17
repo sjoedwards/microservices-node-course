@@ -1,6 +1,6 @@
 import { requireAuth, validateRequest } from "@sjoedwards/common";
 import { body } from "express-validator";
-import { Router, Response, Request } from "express";
+import { Router, Response, Request, NextFunction } from "express";
 import { Ticket } from "../models/ticket";
 
 const router = Router();
@@ -8,11 +8,10 @@ router.post(
   "/api/tickets",
   requireAuth,
   [
-    body("title")
-      .not()
-      .isEmpty()
-      .withMessage("Price must be greater than zero"),
-    body("price").isFloat({ gt: 0 }),
+    body("title").not().isEmpty().withMessage("Title must not be empty"),
+    body("price")
+      .isFloat({ gt: 0 })
+      .withMessage("Price must be a positive value"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {

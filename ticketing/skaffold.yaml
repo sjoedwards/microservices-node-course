@@ -23,7 +23,7 @@ build:
         - src: 'src/**/*.ts'
           dest: .
   - image: sjoedwards1/tickets
-    context: auth
+    context: tickets
     docker:
       dockerfile: Dockerfile
     sync:
