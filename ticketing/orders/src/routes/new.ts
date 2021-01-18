@@ -1,10 +1,18 @@
+import { OrderStatus } from "./../../../common/src/events/types/order-status";
 import mongoose from "mongoose";
-import { requireAuth } from "@sjoedwards/common";
+import {
+  requireAuth,
+  NotFoundError,
+  BadRequestError,
+} from "@sjoedwards/common";
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
+import { Order } from "../models/order";
 
 const router = express.Router();
+
+const EXPIRATION_WINDOW_SECONDS = 15 * 60;
 
 router.post(
   "/api/orders",
@@ -22,16 +30,30 @@ router.post(
     const ticket = await Ticket.findById(ticketId);
 
     if (!ticket) {
-      throw new NotFoundError()
-    })
-    // Make sure the ticket isn't already reserved
+      throw new NotFoundError("Ticket not found");
+    }
+
+    const isReserved = await ticket.isReserved();
+    if (isReserved) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
 
     // Calculate an expiration date - 15 minutes
+    const expiration = new Date();
+    expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
 
     // Build the order and save to the database
+    const order = Order.build({
+      userId: req.currentUser.id,
+      status: OrderStatus.Created,
+      expiresAt: expiration,
+      ticket,
+    });
+
+    await order.save();
 
     // Tell the rest of the application who might need the database - publish event
-    res.send({});
+    res.status(201).send(order);
   }
 );
 

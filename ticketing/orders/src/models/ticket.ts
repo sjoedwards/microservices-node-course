@@ -1,4 +1,6 @@
+import { OrderStatus } from "@sjoedwards/common";
 import mongoose from "mongoose";
+import { Order } from "./order";
 
 // This looks a lot like ticket/models/ticket.ts...
 // Can we abstract it into a shared library? Absolutely not
@@ -14,6 +16,7 @@ interface TicketAttrs {
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
+  isReserved(): Promise<boolean>;
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -43,9 +46,32 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
   }
 );
 
+// Statics adds to the model
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs);
 };
+
+// Methods adds to the document
+
+// Make sure the ticket isn't already reserved
+// Run query to look at orders and find ticket where one just fetched and orders status is *not* cancelled
+ticketSchema.methods.isReserved = async function () {
+  // This is equal to the document that we just called 'isReserved' on
+  // Arrow function would relate to the function itself
+  const existingOrder = await Order.findOne({
+    ticket: this,
+    status: {
+      $in: [
+        OrderStatus.Created ||
+          OrderStatus.AwaitingPayment ||
+          OrderStatus.Complete,
+      ],
+    },
+  });
+
+  return !!existingOrder;
+};
+
 // This has to go below the schema, otherwise the static methods are not included
 const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
 
