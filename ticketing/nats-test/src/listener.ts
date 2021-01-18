@@ -1,6 +1,6 @@
 // Create random string with numbers and letters
 import { randomBytes } from "crypto";
-import nats, { Message, Stan } from "node-nats-streaming";
+import nats from "node-nats-streaming";
 import { TicketCreatedListener } from "./events/ticket-created-listener";
 
 console.clear();

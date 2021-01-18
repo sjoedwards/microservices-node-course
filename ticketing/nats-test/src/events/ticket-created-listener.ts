@@ -1,7 +1,5 @@
-import { Subjects } from "./subjects";
-import { TicketCreatedEvent } from "./ticket-created-event";
 import { Message } from "node-nats-streaming";
-import { Listener } from "./base-listener";
+import { Subjects, TicketCreatedEvent, Listener } from "@sjoedwards/common";
 
 // TicketCreatedEvent fufills the interface fo Event (has a subject and data)
 class TicketCreatedListener extends Listener<TicketCreatedEvent> {

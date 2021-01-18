@@ -100,3 +100,8 @@ Navigate to http://localhost:8222/streaming
 
 More information about the channels:
 http://localhost:8222/streaming/channelsz?subs=1
+
+To flush the NATS server:
+kubectl delete pod [nats-pod-name]
+
+Will create a new NATS pod with the updated values
