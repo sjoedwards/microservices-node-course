@@ -15,6 +15,8 @@ spec:
     spec:
       containers:
         # Can be anything - just used for loggings
+        # TODO readiness probe - can do by setting up a http endpoint on another port
+        # Which trys to connect to the database / nats server to ensure its up
         - name: tickets
           image: sjoedwards1/tickets
           env:
@@ -25,6 +27,16 @@ spec:
                     key: JWT_KEY
             - name: MONGO_URI
               value: mongodb://tickets-mongo-srv:27017/tickets
+            - name: NATS_URL
+              value: http://nats-srv:4222
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+              # Will pass in an environment variable of the pod name
+              # Means that in logs, will be able to tie events back to the deployment
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 # Define the clusterIP
 apiVersion: v1

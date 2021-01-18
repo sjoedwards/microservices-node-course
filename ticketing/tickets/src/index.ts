@@ -11,9 +11,25 @@ const start = async () => {
     throw new Error("Mongo URI must be defined");
   }
 
+  if (!process.env.NATS_URL) {
+    throw new Error("NATS_URL must be defined");
+  }
+
+  if (!process.env.NATS_CLUSTER_ID) {
+    throw new Error("NATS_CLUSTER_ID must be defined");
+  }
+
+  if (!process.env.NATS_CLIENT_ID) {
+    throw new Error("NATS_CLIENT_ID must be defined");
+  }
+
   try {
     // Cluster Id (CID) argument on the deployment of the NATS streaming server
-    await natsWrapper.connect("ticketing", "laskjf", "http://nats-srv:4222");
+    await natsWrapper.connect(
+      process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URL
+    );
 
     // Anytime that the connection to NATS is closed (SIGINT/TERM or pod removal - gracefully close connection and stop process)
     natsWrapper.client.on("close", () => {

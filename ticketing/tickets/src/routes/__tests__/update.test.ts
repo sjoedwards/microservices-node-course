@@ -1,8 +1,11 @@
+import { natsWrapper } from "./../../nats-wrapper";
 import { createTicket } from "./../../test/utils";
 import mongoose from "mongoose";
 import request from "supertest";
 
 import { app } from "../../app";
+
+jest.mock("../../nats-wrapper.ts");
 
 let id: string;
 beforeEach(() => {
@@ -69,4 +72,22 @@ test("updates the ticket given valid inputs", async () => {
 
   expect(ticketResponse.body.title).toEqual("new title");
   expect(ticketResponse.body.price).toEqual(100);
+});
+
+test("publishes an event", async () => {
+  const cookie = await global.signin();
+  const response = await createTicket(app, { cookie });
+
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({ title: "new title", price: 100 })
+    .expect(200);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalledTimes(2);
+  expect(natsWrapper.client.publish).toHaveBeenLastCalledWith(
+    "ticket:updated",
+    expect.any(String),
+    expect.any(Function)
+  );
 });
