@@ -1,7 +1,8 @@
 import { requireAuth, validateRequest } from "@sjoedwards/common";
 import { body } from "express-validator";
-import { Router, Response, Request, NextFunction } from "express";
+import { Router, Response, Request } from "express";
 import { Ticket } from "../models/ticket";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
 
 const router = Router();
 router.post(
@@ -24,6 +25,13 @@ router.post(
     });
 
     await ticket.save();
+    new TicketCreatedPublisher(client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
+
     res.status(201).send(ticket);
   }
 );

@@ -1,6 +1,7 @@
+import { NatEvent } from "./events";
 import { Subjects } from "./subjects";
 
-export interface TicketUpdatedEvent extends Event {
+export interface TicketUpdatedEvent extends NatEvent {
   subject: Subjects.TicketUpdated;
   data: {
     id: string;

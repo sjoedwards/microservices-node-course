@@ -1,13 +1,7 @@
-import { Subjects } from "./subjects";
+import { NatEvent } from "./events";
 import { Message, Stan } from "node-nats-streaming";
 
-interface Event {
-  subject: Subjects;
-  data: any;
-}
-
-// Have to provide an event!
-abstract class Listener<T extends Event> {
+abstract class Listener<T extends NatEvent> {
   abstract subject: T["subject"];
   abstract queueGroupName: string;
 
