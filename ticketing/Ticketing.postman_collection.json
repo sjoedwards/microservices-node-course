@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "4794087d-91b1-4b28-9bcb-15da887b60c4",
+		"name": "Ticketing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    pm.environment.set(\"token\", pm.response.json().token)",
+									"    pm.environment.set(\"email\", pm.response.json().email)",
+									"    pm.environment.set(\"id\", pm.response.json().id)",
+									"    pm.environment.set(\"password\", JSON.parse(pm.request.body.raw).password)",
+									"} else {",
+									"    throw new Error()",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"emai11221111l@test.com\",\n    \"password\": \"pw22233322\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/users/signup",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set(\"token\", pm.response.json().token)",
+									"    pm.environment.set(\"email\", pm.response.json().email)",
+									"    pm.environment.set(\"id\", pm.response.json().id)",
+									"    pm.environment.set(\"password\", JSON.parse(pm.request.body.raw).password)",
+									"} else {",
+									"    throw new Error()",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/users/signin",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/users/currentuser",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"currentuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/users/signout",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "Get All Tickets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"",
+									"} else {",
+									"    throw new Error()",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"emai11221111l@test.com\",\n    \"password\": \"pw22233322\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/tickets",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ticket By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"",
+									"} else {",
+									"    throw new Error()",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/tickets/600324e863828700431b7b2b",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"600324e863828700431b7b2b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Ticket By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"",
+									"} else {",
+									"    throw new Error()",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"this is a ticket!1\",\n    \"price\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/tickets/600591e1ddcaeb002e13c357",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"600591e1ddcaeb002e13c357"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Ticket",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"",
+									"} else {",
+									"    throw new Error()",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"emai11221111l@test.com\",\n    \"password\": \"pw22233322\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketing_url}}/api/tickets",
+							"host": [
+								"{{ticketing_url}}"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
