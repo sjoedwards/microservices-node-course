@@ -1,19 +1,19 @@
 import mongoose from "mongoose";
 
-// This looks a lot like ticket/orders/ticket.ts...
+// This looks a lot like ticket/models/ticket.ts...
 // Can we abstract it into a shared library? Absolutely not
 // Each microservice has its own database, so the model for the data which is going to be stored is also unique
 // Therefore two type definitions are required
+
 interface TicketAttrs {
   title: string;
   price: number;
-  userId: string;
 }
 
-interface TicketDoc extends mongoose.Document {
+// Export so we can import into the order
+export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
-  userId: string;
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -29,10 +29,7 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
     price: {
       type: Number,
       required: true,
-    },
-    userId: {
-      type: String,
-      required: true,
+      min: 0,
     },
   },
   {

@@ -2,10 +2,9 @@ import { ErrorResponse } from "../types";
 import { CustomError } from "./custom-error";
 
 export class NotFoundError extends CustomError {
-  reason = "Route could not be found";
   statusCode = 404;
-  constructor() {
-    super("Route could not be found");
+  constructor(public message = "Route could not be found") {
+    super(message);
     // Only because we are extending a built in class
     Object.setPrototypeOf(this, NotFoundError.prototype);
   }
@@ -13,7 +12,7 @@ export class NotFoundError extends CustomError {
   serializeErrors(): ErrorResponse {
     return [
       {
-        message: this.reason,
+        message: this.message,
       },
     ];
   }
