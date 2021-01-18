@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-depl
+spec:
+  replicas: 1
+  # Tells deployment how to find the pods to create
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      containers:
+        # Can be anything - just used for loggings
+        # TODO readiness probe - can do by setting up a http endpoint on another port
+        # Which trys to connect to the database / nats server to ensure its up
+        - name: orders
+          image: sjoedwards1/orders
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                  secretKeyRef:
+                    name: jwt-secret
+                    key: JWT_KEY
+            - name: MONGO_URI
+              value: mongodb://orders-mongo-srv:27017/orders
+            - name: NATS_URL
+              value: http://nats-srv:4222
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+              # Will pass in an environment variable of the pod name
+              # Means that in logs, will be able to tie events back to the deployment
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+---
+# Define the clusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-srv
+spec:
+  # Don't define type - the default is the clusterIP service
+  selector:
+    app: orders
+  ports:
+    - name: orders
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

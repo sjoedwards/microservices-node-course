@@ -14,10 +14,6 @@ Add ingress-NGINX
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
-## [Postman collection](./Ticketing.postman_collection.json)
-
-## Run skaffold k8s setup
-
 Need to build all of the images locally & push to docker hub once first
 
 Populate a .env file based off the .env.example file
@@ -43,6 +39,8 @@ skaffold dev
 ```
 
 Should be able to access application on https://ticketing.dev
+
+## [Postman collection](./Ticketing.postman_collection.json)
 
 # GCloud kubectl k8 setup
 
