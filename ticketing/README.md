@@ -81,3 +81,22 @@ Add this to the /etc/hosts file, minus the port (443)
 In skaffold.yaml, comment out local config and uncomment GCP config block
 
 skaffold dev
+
+### Port forwarding
+
+- To access a specific pod without going through the ingress you can set up a port forward
+- kubectl port-forward [pod-name] portIn:targetPort
+- i.e. kubectl port-forward nats-depl-d6b48b4b8-n2nkw 4222:4222
+
+### To see NATS dashboard
+
+Terminal 1:
+kubectl port-forward [nats-pod-name] 4222:4222
+
+Terminal 2:
+kubectl port-forward [nats-pod-name] 8222:8222
+
+Navigate to http://localhost:8222/streaming
+
+More information about the channels:
+http://localhost:8222/streaming/channelsz?subs=1
