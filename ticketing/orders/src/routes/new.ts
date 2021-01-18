@@ -52,7 +52,8 @@ router.post(
 
     await order.save();
 
-    // Tell the rest of the application who might need the database - publish event
+    // TODO Tell the rest of the application who might need the database - publish event
+
     res.status(201).send(order);
   }
 );

@@ -1,3 +1,5 @@
+import { buildTicket } from "./../../test/utils";
+import { createTicket } from "./../../../../tickets/src/test/utils";
 import request from "supertest";
 
 import { app } from "../../app";
@@ -39,9 +41,7 @@ test("returns an error if the ticket is already reserved", async () => {
 });
 
 test("reserves a ticket", async () => {
-  const ticket = Ticket.build({ title: "title", price: 20 });
-
-  await ticket.save();
+  const ticket = await buildTicket();
 
   await request(app)
     .post("/api/orders")
@@ -49,3 +49,5 @@ test("reserves a ticket", async () => {
     .send({ ticketId: ticket.id })
     .expect(201);
 });
+
+test.todo("emits an order created event");
