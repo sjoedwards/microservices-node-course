@@ -11,7 +11,6 @@ abstract class Listener<T extends Event> {
   abstract subject: T["subject"];
   abstract queueGroupName: string;
 
-  // TODO define type
   abstract onMessage(data: T["data"], msg: Message): void;
 
   private client: Stan;

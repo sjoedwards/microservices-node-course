@@ -1,6 +1,6 @@
 import { Subjects } from "./subjects";
 import { TicketCreatedEvent } from "./ticket-created-event";
-import { Message, Stan } from "node-nats-streaming";
+import { Message } from "node-nats-streaming";
 import { Listener } from "./base-listener";
 
 // TicketCreatedEvent fufills the interface fo Event (has a subject and data)
@@ -12,6 +12,7 @@ class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   queueGroupName = "payments-service";
 
   onMessage(data: TicketCreatedEvent["data"], msg: Message): void {
+    console.log("message parsed", data);
     msg.ack();
   }
 }
