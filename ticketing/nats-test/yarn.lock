@@ -60,10 +60,10 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@sjoedwards/common@^1.0.28":
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.28.tgz#8dea1caab5ce825c1b9b9ea5810f337aee6a91c2"
-  integrity sha512-0WtrwlK4ySyD5idWXBMPtZaVyGep1gltzmm5pAKGbtApbwwEISX2gHcd/L/yQHOvp7tpMpXTH4W+HAn1WvX1lA==
+"@sjoedwards/common@^1.0.29":
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.29.tgz#74cb0850f07dec71b17e157551713eba53f34350"
+  integrity sha512-KAyuS0aayANmQwt6iLE9w7Y2lPDDf/UXwQBJEQQN/kBZUdD3CWQusfVR6OU8cVnhVaVyeplig1DpkZPKHAejZA==
   dependencies:
     "@types/cookie-session" "^2.0.42"
     "@types/express" "^4.17.11"
