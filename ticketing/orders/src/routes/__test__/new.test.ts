@@ -1,5 +1,4 @@
 import { buildTicket } from "./../../test/utils";
-import { createTicket } from "./../../../../tickets/src/test/utils";
 import request from "supertest";
 
 import { app } from "../../app";
