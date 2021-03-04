@@ -8,6 +8,7 @@ import { Order } from "./order";
 // Therefore two type definitions are required
 
 interface TicketAttrs {
+  id: string;
   title: string;
   price: number;
 }
@@ -47,8 +48,8 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
 );
 
 // Statics adds to the model
-ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket(attrs);
+ticketSchema.statics.build = ({ id, title, price }: TicketAttrs) => {
+  return new Ticket({ _id: id, title, price });
 };
 
 // Methods adds to the document

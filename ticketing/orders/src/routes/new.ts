@@ -1,6 +1,6 @@
 import { natsWrapper } from "./../nats-wrapper";
 import { OrderCreatedPublisher } from "./../../events/publishers/order-created-publisher";
-import { OrderStatus } from "./../../../common/src/events/types/order-status";
+import { OrderStatus } from "@sjoedwards/common";
 import mongoose from "mongoose";
 import {
   requireAuth,

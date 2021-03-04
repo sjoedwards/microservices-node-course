@@ -1,11 +1,11 @@
 import { natsWrapper } from "./../nats-wrapper";
 import { OrderCancelledPublisher } from "./../../events/publishers/order-cancelled-publisher";
-import { NotAuthorizedError } from "./../../../common/src/errors/not-authorized-error";
 import {
   NotFoundError,
   OrderStatus,
   currentUser,
   requireAuth,
+  NotAuthorizedError,
 } from "@sjoedwards/common";
 import express, { Request, Response } from "express";
 import { Order } from "../models/order";
