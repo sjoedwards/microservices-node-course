@@ -1,3 +1,4 @@
+import { natsWrapper } from "./../../nats-wrapper";
 import { buildTicket } from "./../../test/utils";
 import request from "supertest";
 
@@ -49,4 +50,14 @@ test("reserves a ticket", async () => {
     .expect(201);
 });
 
-test.todo("emits an order created event");
+test("emits an order created event", async () => {
+  const ticket = await buildTicket();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", global.signin())
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});

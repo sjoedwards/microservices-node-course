@@ -1,3 +1,5 @@
+import { natsWrapper } from "./../nats-wrapper";
+import { OrderCreatedPublisher } from "./../../events/publishers/order-created-publisher";
 import { OrderStatus } from "./../../../common/src/events/types/order-status";
 import mongoose from "mongoose";
 import {
@@ -52,7 +54,16 @@ router.post(
 
     await order.save();
 
-    // TODO Tell the rest of the application who might need the database - publish event
+    new OrderCreatedPublisher(natsWrapper.client).publish({
+      id: order.status,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      ticket: {
+        id: ticket.id,
+        price: ticket.price,
+      },
+    });
 
     res.status(201).send(order);
   }

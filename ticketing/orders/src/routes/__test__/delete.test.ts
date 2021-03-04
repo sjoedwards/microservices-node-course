@@ -1,3 +1,4 @@
+import { natsWrapper } from "./../../nats-wrapper";
 import { OrderStatus } from "@sjoedwards/common";
 import { buildTicket, createOrder } from "./../../test/utils";
 import request from "supertest";
@@ -21,4 +22,17 @@ test("marks an order as cancelled", async () => {
   expect(updatedOrder.status).toEqual(OrderStatus.Cancelled);
 });
 
-test.todo("It publishes an order cancelled event");
+test("It publishes an order cancelled event", async () => {
+  // Create a ticket with the ticket model
+  const ticket = await buildTicket();
+  const user = global.signin();
+  // Make a request to create an order
+  const { body: order } = await createOrder(app, ticket.id, user);
+  // Make a request to cancel an order
+  await request(app)
+    .delete(`/api/orders/${order.id}`)
+    .set("Cookie", user)
+    .send()
+    .expect(204);
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
