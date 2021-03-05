@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-srv
@@ -15,19 +15,23 @@ spec:
         paths:
           - path: /posts/create
             backend:
-              serviceName: posts-clusterip-srv
-              servicePort: 4000
+              service:
+                name: posts-clusterip-srv
+                port: 4000
           - path: /posts
             backend:
-              serviceName: query-srv
-              servicePort: 4002
+              service:
+                name: query-srv
+                port: 4002
           # Our annotation lets us use this regex
           - path: /posts/?(.*)/comments
             backend:
-              serviceName: comments-srv
-              servicePort: 4001
+              service:
+                name: comments-srv
+                port: 4001
           # Match all other paths
           - path: /?(.*)
             backend:
-              serviceName: client-srv
-              servicePort: 3000
+              service:
+                  name: client-srv
+                  port: 3000
