@@ -1,8 +1,6 @@
 import { buildTicket, createOrder } from "./../../test/utils";
 import request from "supertest";
 import { app } from "../../app";
-import { Order } from "../../models/order";
-import { Ticket } from "../../models/ticket";
 
 test("fetches order for a particular user", async () => {
   // Create three tickets using the ticket model directly

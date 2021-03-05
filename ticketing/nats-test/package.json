@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sjoedwards/common": "^1.0.33",
+    "@sjoedwards/common": "^1.0.34",
     "@types/node": "^14.14.21",
     "node-nats-streaming": "^0.3.2",
     "ts-node-dev": "^1.1.1",

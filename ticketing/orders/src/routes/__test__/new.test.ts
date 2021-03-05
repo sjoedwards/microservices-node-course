@@ -20,7 +20,9 @@ test("returns an error if the ticket does not exist", async () => {
 });
 
 test("returns an error if the ticket is already reserved", async () => {
-  const ticket = Ticket.build({ title: "title", price: 20 });
+  const ticketId = mongoose.Types.ObjectId().toHexString();
+
+  const ticket = Ticket.build({ id: ticketId, title: "title", price: 20 });
 
   await ticket.save();
 
