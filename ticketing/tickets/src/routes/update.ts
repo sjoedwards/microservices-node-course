@@ -47,6 +47,7 @@ router.put(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
+      version: ticket.version,
     });
 
     // A 'database transaction' essentially means that theres a collection of information we need to save to the

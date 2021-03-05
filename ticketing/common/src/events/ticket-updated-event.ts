@@ -8,5 +8,6 @@ export interface TicketUpdatedEvent extends NatEvent {
     title: string;
     price: number;
     userId: string;
+    version: number;
   };
 }

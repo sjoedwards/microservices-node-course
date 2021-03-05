@@ -1,5 +1,6 @@
 import { OrderStatus } from "@sjoedwards/common";
 import mongoose from "mongoose";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { Order } from "./order";
 
 // This looks a lot like ticket/models/ticket.ts...
@@ -17,6 +18,7 @@ interface TicketAttrs {
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
+  version: number;
   isReserved(): Promise<boolean>;
 }
 
@@ -46,6 +48,10 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
     },
   }
 );
+
+// Needed for tracking the version for concurrency issues in listeners
+ticketSchema.set("versionKey", "version");
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 // Statics adds to the model
 ticketSchema.statics.build = ({ id, title, price }: TicketAttrs) => {

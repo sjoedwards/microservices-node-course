@@ -1,3 +1,4 @@
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import mongoose from "mongoose";
 
 // This looks a lot like ticket/orders/ticket.ts...
@@ -14,8 +15,8 @@ interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   userId: string;
+  version: number;
 }
-
 interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
 }
@@ -45,6 +46,13 @@ const ticketSchema = new mongoose.Schema<TicketDoc, TicketModel>(
     },
   }
 );
+
+// Needed for tracking the version for concurrency issues in listeners
+ticketSchema.set("versionKey", "version");
+
+// Only want to include this when its the PRIMARY service (normally where it was created)
+// This is to prevent missing versions on different services
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs);
