@@ -51,3 +51,17 @@ test("acks the message", async () => {
   // write assertions to make sure ack function was called
   expect(msg.ack).toBeCalledTimes(1);
 });
+
+test("Does not call ack if the event has a skipped version", async () => {
+  const { msg, data, listener } = await setup();
+
+  data.version = 10;
+  let error;
+  try {
+    await listener.onMessage(data, msg);
+  } catch (err) {
+    error = err;
+  }
+  expect(error.message).toEqual("Ticket not found!");
+  expect(msg.ack).not.toHaveBeenCalled();
+});

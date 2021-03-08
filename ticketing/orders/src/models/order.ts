@@ -1,3 +1,4 @@
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { TicketDoc } from "./ticket";
 import { OrderStatus } from "@sjoedwards/common";
 import mongoose from "mongoose";
@@ -13,6 +14,7 @@ interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
+  version: number;
 }
 
 // Attributes
@@ -50,6 +52,12 @@ const orderSchema = new mongoose.Schema<OrderDoc, OrderModel>(
     },
   }
 );
+
+// By default its __v which isn't very verbose
+orderSchema.set("versionKey", "version");
+
+// Automatically checks to see if the version is one above current when doing a save
+orderSchema.plugin(updateIfCurrentPlugin);
 
 orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order(attrs);
