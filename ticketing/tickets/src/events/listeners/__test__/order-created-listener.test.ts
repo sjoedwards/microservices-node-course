@@ -22,8 +22,14 @@ const setup = async () => {
     expiresAt: "asdasd",
     version: 0,
     ticket: {
-      id: ticket.id
-      price: ticket.price
-    }
+      id: ticket.id,
+      price: ticket.price,
+    },
   };
+
+  //@ts-ignore
+  const msg: Message = {
+    ack: jest.fn(),
+  };
+  return { listener, ticket, data, msg };
 };
