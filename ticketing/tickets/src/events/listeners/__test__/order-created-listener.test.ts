@@ -13,6 +13,7 @@ const setup = async () => {
     price: 99,
     userId: "asdf",
   });
+  await ticket.save();
 
   // Create a fake data event
   const data: OrderCreatedEvent["data"] = {
@@ -33,3 +34,19 @@ const setup = async () => {
   };
   return { listener, ticket, data, msg };
 };
+
+it("sets the userId of the ticket", async () => {
+  const { listener, ticket, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+  const updatedTicket = await Ticket.findById(ticket.id);
+
+  expect(updatedTicket.orderId).toEqual(data.id);
+});
+
+it("acks the message", async () => {
+  const { listener, data, msg } = await setup();
+  await listener.onMessage(data, msg);
+
+  expect(msg.ack).toHaveBeenCalled();
+});

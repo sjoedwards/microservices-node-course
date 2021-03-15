@@ -2,7 +2,7 @@ import { NatEvent } from "./events";
 import { Stan } from "node-nats-streaming";
 export abstract class Publisher<T extends NatEvent> {
   abstract subject: T["subject"];
-  private client: Stan;
+  protected client: Stan;
 
   constructor(client: Stan) {
     this.client = client;
