@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 
 import { app } from "../../app";
+import { Ticket } from "../../models/ticket";
 
 jest.mock("../../nats-wrapper.ts");
 
@@ -90,4 +91,18 @@ test("publishes an event", async () => {
     expect.any(String),
     expect.any(Function)
   );
+});
+
+test.only("rejects updates if ticket is reserved", async () => {
+  const cookie = await global.signin();
+  const response = await createTicket(app, { cookie });
+  const ticket = await Ticket.findById(response.body.id);
+  ticket.set({ orderId: mongoose.Types.ObjectId().toHexString() });
+  await ticket.save();
+
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({ title: "new title", price: 100 })
+    .expect(400);
 });

@@ -6,6 +6,7 @@ import {
   validateRequest,
   requireAuth,
   NotAuthorizedError,
+  BadRequestError,
 } from "@sjoedwards/common";
 import { Request, Response, Router } from "express";
 import { Ticket } from "../models/ticket";
@@ -22,6 +23,11 @@ router.put(
   validateRequest,
   async (req: Request, res: Response) => {
     const ticket = await Ticket.findById(req.params.id);
+
+    // if reserved
+    if (ticket.orderId) {
+      throw new BadRequestError("Cannot edit a reserved ticket");
+    }
 
     if (!ticket) {
       throw new NotFoundError();
