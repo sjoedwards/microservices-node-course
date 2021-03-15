@@ -41,6 +41,15 @@ build:
         # Mount this file if it exists, or rebuild the entire image
         - src: 'src/**/*.ts'
           dest: .
+  - image: sjoedwards1/expiration
+    context: expiration
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        # Mount this file if it exists, or rebuild the entire image
+        - src: 'src/**/*.ts'
+          dest: .
   - image: sjoedwards1/client
     context: client
     docker:

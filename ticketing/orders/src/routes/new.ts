@@ -6,6 +6,7 @@ import {
   requireAuth,
   NotFoundError,
   BadRequestError,
+  validateRequest,
 } from "@sjoedwards/common";
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
@@ -26,11 +27,10 @@ router.post(
       .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
       .withMessage("TicketId must be provided"),
   ],
+  validateRequest,
   async (req: Request, res: Response) => {
     const { ticketId } = req.body;
-    // Find the ticket the user is trying to order
     const ticket = await Ticket.findById(ticketId);
-
     if (!ticket) {
       throw new NotFoundError("Ticket not found");
     }
@@ -55,14 +55,14 @@ router.post(
     await order.save();
 
     new OrderCreatedPublisher(natsWrapper.client).publish({
-      id: order.status,
+      id: order.id,
       status: order.status,
       userId: order.userId,
       expiresAt: order.expiresAt.toISOString(),
+      version: ticket.version,
       ticket: {
         id: ticket.id,
         price: ticket.price,
-        version: ticket.version,
       },
     });
 

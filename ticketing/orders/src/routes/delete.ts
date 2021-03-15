@@ -17,6 +17,7 @@ router.delete(
   requireAuth,
   async (req: Request, res: Response) => {
     const { orderId } = req.params;
+    console.log("🚀 ~ file: delete.ts ~ line 20 ~ orderId", orderId);
 
     const order = await Order.findById(orderId).populate("ticket");
 
@@ -33,7 +34,8 @@ router.delete(
 
     new OrderCancelledPublisher(natsWrapper.client).publish({
       id: order.id,
-      ticket: { id: order.ticket.id, version: order.ticket.version },
+      version: order.version,
+      ticket: { id: order.ticket.id },
     });
 
     res.status(204).send(order);

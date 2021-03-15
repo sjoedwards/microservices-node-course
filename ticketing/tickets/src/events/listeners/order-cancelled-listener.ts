@@ -1,10 +1,8 @@
+import { queueGroupName } from "./queue-group-name";
 import { TicketUpdatedPublisher } from "./../publishers/ticket-updated-publisher";
 import { Message } from "node-nats-streaming";
-import { queueGroupName } from "./../../../../orders/src/events/listeners/queue-group-name";
-import { Subjects } from "./../../../../common/src/events/subjects";
-import { Listener, OrderCancelledEvent } from "@sjoedwards/common";
+import { Listener, OrderCancelledEvent, Subjects } from "@sjoedwards/common";
 import { Ticket } from "../../models/ticket";
-
 export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
   subject: Subjects.OrderCancelled = Subjects.OrderCancelled;
   queueGroupName = queueGroupName;

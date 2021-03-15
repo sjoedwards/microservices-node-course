@@ -14,7 +14,7 @@ export abstract class Publisher<T extends NatEvent> {
         if (err) {
           return reject(err);
         } else {
-          console.log("Event Published");
+          console.log("Event Published", this.subject);
           return resolve();
         }
       });

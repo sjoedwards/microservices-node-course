@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+spec:
+  replicas: 1
+  # Tells deployment how to find the pods to create
+  selector:
+    matchLabels:
+      app: expiration
+  template:
+    metadata:
+      labels:
+        app: expiration
+    spec:
+      containers:
+        # Can be anything - just used for loggings
+        # TODO readiness probe - can do by setting up a http endpoint on another port
+        # Which trys to connect to the database / nats server to ensure its up
+        - name: expiration
+          image: sjoedwards1/expiration
+          env:
+            - name: NATS_URL
+              value: http://nats-srv:4222
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+              # Will pass in an environment variable of the pod name
+              # Means that in logs, will be able to tie events back to the deployment
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: REDIS_HOST
+              value: expiration-redis-srv
+# Don't need a service - no other pods need to root traffic here - all comms go through NATS streaming server!
