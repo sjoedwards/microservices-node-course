@@ -1,3 +1,4 @@
+import { TicketUpdatedPublisher } from "./../publishers/ticket-updated-publisher";
 import { queueGroupName } from "./queue-group-name";
 import { Message } from "node-nats-streaming";
 import { Subjects, OrderCreatedEvent, Listener } from "@sjoedwards/common";
@@ -21,6 +22,17 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     ticket.set({ orderId: data.id });
     // Save the ticket
     await ticket.save();
+
+    // Client is protected - it resides on the instance of Listener when it is created
+    const { id, price, title, userId, orderId, version } = ticket;
+    await new TicketUpdatedPublisher(this.client).publish({
+      id,
+      price,
+      title,
+      userId,
+      orderId,
+      version,
+    });
     // Ack the message
     msg.ack();
   }
