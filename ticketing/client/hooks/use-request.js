@@ -8,10 +8,6 @@ const useRequest = ({ url, method, body, onSuccess }) => {
     try {
       setErrors(null);
       const response = await axios[method](url, body);
-      console.log(
-        "🚀 ~ file: use-request.js ~ line 11 ~ doRequest ~ response",
-        response
-      );
       if (onSuccess) {
         onSuccess(response.data);
       }
