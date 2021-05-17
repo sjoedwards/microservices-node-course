@@ -105,3 +105,8 @@ To flush the NATS server:
 kubectl delete pod [nats-pod-name]
 
 Will create a new NATS pod with the updated values
+
+## Troubleshooting
+
+- If you find that you can't resolve ticketing.dev, try `kubectl --namespace ingress-nginx describe pods`
+- If you get a message resembling `0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/disk-pressure: }, that the pod didn't tolerate.`. Try and increase the resources docker-desktop is entitled too. 
