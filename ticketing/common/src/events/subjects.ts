@@ -5,5 +5,5 @@ export enum Subjects {
   TicketUpdated = "ticket:updated",
   OrderCreated = "order:created",
   OrderCancelled = "order:cancelled",
-  ExpriationComplete = "expriation:complete",
+  ExpirationComplete = "expiration:complete",
 }

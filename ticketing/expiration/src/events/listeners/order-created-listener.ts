@@ -14,7 +14,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     // Takes the expiray ISO and then turns it into a no of milliseconds
     const delay = new Date(data.expiresAt).getTime() - new Date().getTime();
     console.log(`Waiting ${delay} milliseconds to process the job`);
-    await expirationQueue.add({ orderId: data.id }, { delay });
+    await expirationQueue.add({ orderId: data.id });
 
     msg.ack();
   }
