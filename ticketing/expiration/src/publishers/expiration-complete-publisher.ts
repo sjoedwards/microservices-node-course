@@ -5,5 +5,5 @@ import {
 } from "@sjoedwards/common";
 
 export class ExpirationCompletePublisher extends Publisher<ExpirationCompleteEvent> {
-  subject: Subjects.ExpriationComplete = Subjects.ExpriationComplete;
+  subject: Subjects.ExpirationComplete = Subjects.ExpirationComplete;
 }
