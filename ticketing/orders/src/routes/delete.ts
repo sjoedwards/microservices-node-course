@@ -1,5 +1,5 @@
 import { natsWrapper } from "./../nats-wrapper";
-import { OrderCancelledPublisher } from "./../../events/publishers/order-cancelled-publisher";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 import {
   NotFoundError,
   OrderStatus,

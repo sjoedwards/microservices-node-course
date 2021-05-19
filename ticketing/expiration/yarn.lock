@@ -543,10 +543,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sjoedwards/common@^1.0.38":
-  version "1.0.38"
-  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.38.tgz#4dc93c53e28191d305831c265b9872844be38de0"
-  integrity sha512-WvKKoIapC9uIgegK4N8Kn9NdrTgmh/RVFpqDGGc+cD5gl8FzU4t9cGUIIxb17nps8H+8KFutkauTFfWe4M6m9g==
+"@sjoedwards/common@^1.0.43":
+  version "1.0.43"
+  resolved "https://registry.yarnpkg.com/@sjoedwards/common/-/common-1.0.43.tgz#2a197c2f5959b8eab5945a0670ed3d041e82a8de"
+  integrity sha512-isGqMVwMLzuPngYqq8bqaD4wspI8xF0TuIu3PTckUCu8e0LPfMC1r1nqcRyog20db/+c3i+Jk3jAjZGlSgEzUA==
   dependencies:
     "@types/cookie-session" "^2.0.42"
     "@types/express" "^4.17.11"
