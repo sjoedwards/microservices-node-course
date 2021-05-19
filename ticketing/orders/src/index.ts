@@ -1,4 +1,4 @@
-import { ExpirationCompleteListener } from './events/listeners/expiration-complete-listener';
+import { ExpirationCompleteListener } from "./events/listeners/expiration-complete-listener";
 import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
 import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
 import mongoose from "mongoose";
