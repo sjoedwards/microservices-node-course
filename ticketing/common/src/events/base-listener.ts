@@ -1,5 +1,5 @@
 import { NatEvent } from "./events";
-import { Message, Stan } from "node-nats-streaming";
+import { Message, Stan, SubscriptionOptions } from "node-nats-streaming";
 
 abstract class Listener<T extends NatEvent> {
   abstract subject: T["subject"];
@@ -14,7 +14,7 @@ abstract class Listener<T extends NatEvent> {
     this.client = client;
   }
 
-  subscriptionOptions() {
+  subscriptionOptions(): SubscriptionOptions {
     return (
       this.client
         .subscriptionOptions()
@@ -29,7 +29,7 @@ abstract class Listener<T extends NatEvent> {
     );
   }
 
-  listen() {
+  listen(): void {
     const subscription = this.client.subscribe(
       this.subject,
       // By subscribing to a queue group, means messages will
@@ -48,7 +48,7 @@ abstract class Listener<T extends NatEvent> {
     });
   }
 
-  parseMessage(msg: Message) {
+  parseMessage(msg: Message): string {
     const data = msg.getData();
     return typeof data === "string"
       ? JSON.parse(data)
