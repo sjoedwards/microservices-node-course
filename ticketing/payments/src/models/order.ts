@@ -21,7 +21,7 @@ interface OrderModel extends Model<OrderDoc> {
   build(attrs: OrderAttrs): OrderDoc;
 }
 
-const orderSchema = new Schema(
+const orderSchema = new Schema<OrderDoc, OrderModel>(
   {
     userId: {
       type: String,

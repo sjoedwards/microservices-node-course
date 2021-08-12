@@ -1,4 +1,4 @@
-import { stripe } from "stripe";
+import { stripe } from "../stripe";
 import {
   requireAuth,
   validateRequest,
