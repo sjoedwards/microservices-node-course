@@ -1,3 +1,4 @@
+import { stripe } from "stripe";
 import {
   requireAuth,
   validateRequest,
@@ -21,7 +22,6 @@ router.post(
     const { token, orderId } = req.body;
 
     const order = await Order.findById(orderId);
-
     if (!order) {
       throw new NotFoundError();
     }
@@ -32,6 +32,13 @@ router.post(
     if (order.status === OrderStatus.Cancelled) {
       throw new BadRequestError("Cannot pay for a cancelled order");
     }
+
+    const charge = await stripe.charges.create({
+      currency: "usd",
+      amount: order.price * 100,
+      source: token,
+      description: "My First Test Charge (created for API docs)",
+    });
     res.send({ success: true });
   }
 );
