@@ -108,5 +108,20 @@ Will create a new NATS pod with the updated values
 
 ## Troubleshooting
 
+### 1
+
 - If you find that you can't resolve ticketing.dev, try `kubectl --namespace ingress-nginx describe pods`
-- If you get a message resembling `0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/disk-pressure: }, that the pod didn't tolerate.`. Try and increase the resources docker-desktop is entitled too. 
+- If you get a message resembling `0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/disk-pressure: }, that the pod didn't tolerate.`. Try and increase the resources docker-desktop is entitled too.
+
+### 2
+
+- Reset kubernetes cluster
+- Docker > Preferences > Purge data
+- Reapply ingress-nginx
+- Reapply secrets
+- Skaffold dev
+
+### 3
+
+- https://kubernetes.github.io/ingress-nginx/troubleshooting/
+  - Here there are instructions for how to increase the log level
