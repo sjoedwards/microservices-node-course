@@ -34,8 +34,7 @@
     "mongodb-memory-server": "^6.9.2",
     "prettier": "^2.2.1",
     "supertest": "^6.0.1",
-    "ts-jest": "^26.4.4",
-    "typescript": "^4.1.3"
+    "ts-jest": "^26.4.4"
   },
   "dependencies": {
     "@sjoedwards/common": "^1.0.43",
@@ -50,6 +49,7 @@
     "mongoose": "^5.11.10",
     "mongoose-update-if-current": "^1.4.0",
     "node-nats-streaming": "^0.3.2",
-    "ts-node-dev": "^1.1.1"
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.3"
   }
 }

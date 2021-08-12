@@ -9,7 +9,7 @@ jest.mock("../nats-wrapper.ts");
 declare global {
   namespace NodeJS {
     interface Global {
-      signin(): string[];
+      signin(id?: string): string[];
     }
   }
 }
@@ -50,8 +50,8 @@ afterAll(async () => {
 
 // This is not really 'signing in', its more generating
 // the cookie that the client would expect to send in the request
-global.signin = () => {
-  const id = new mongoose.Types.ObjectId().toHexString();
+global.signin = (userId?: string) => {
+  const id = userId ?? new mongoose.Types.ObjectId().toHexString();
   const email = "test@test.com";
   const userJwt = jwt.sign(
     {
