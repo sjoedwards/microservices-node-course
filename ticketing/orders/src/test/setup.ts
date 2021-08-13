@@ -6,11 +6,7 @@ jest.mock("../nats-wrapper.ts");
 
 /* eslint-disable @typescript-eslint/no-namespace */
 declare global {
-  namespace NodeJS {
-    interface Global {
-      signin(): string[];
-    }
-  }
+  function signin(_id?: string): string[];
 }
 /* eslint-enable @typescript-eslint/no-namespace */
 

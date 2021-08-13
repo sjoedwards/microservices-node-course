@@ -4,13 +4,11 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import { app } from "../app";
 
 /* eslint-disable @typescript-eslint/no-namespace */
+
 declare global {
-  namespace NodeJS {
-    interface Global {
-      signup(): Promise<string[]>;
-    }
-  }
+  function signup(_id?: string): Promise<string[]>;
 }
+
 /* eslint-enable @typescript-eslint/no-namespace */
 
 let mongo: MongoMemoryServer;
