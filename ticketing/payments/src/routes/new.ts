@@ -10,6 +10,7 @@ import {
 import { body } from "express-validator";
 import express, { Response, Request } from "express";
 import { Order } from "../models/order";
+import { Payment } from "../models/payment";
 
 const router = express.Router();
 
@@ -39,6 +40,11 @@ router.post(
       source: token,
       description: "My First Test Charge (created for API docs)",
     });
+
+    const payment = Payment.build({ orderId, stripeId: charge.id });
+
+    await payment.save();
+
     res.status(201).send({ success: true });
   }
 );
