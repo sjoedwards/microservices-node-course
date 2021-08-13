@@ -37,7 +37,7 @@
     "ts-jest": "^26.4.4"
   },
   "dependencies": {
-    "@sjoedwards/common": "^1.0.43",
+    "@sjoedwards/common": "^1.0.44",
     "@types/cookie-session": "^2.0.42",
     "@types/jsonwebtoken": "^8.5.0",
     "body-parser": "^1.19.0",
