@@ -10,7 +10,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
+    // "plugin:jsx-a11y/recommended",
     "plugin:promise/recommended",
     "plugin:prettier/recommended",
   ],
@@ -28,6 +28,7 @@ module.exports = {
     semi: ["error", "always"],
     "no-shadow": ["error"],
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
   },
   globals: {
     React: "writable",
