@@ -1,13 +1,14 @@
 import { natsWrapper } from "./../nats-wrapper";
 import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
-import { OrderStatus } from "@sjoedwards/common";
-import mongoose from "mongoose";
 import {
+  OrderStatus,
   requireAuth,
   NotFoundError,
   BadRequestError,
   validateRequest,
 } from "@sjoedwards/common";
+import mongoose from "mongoose";
+
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
@@ -15,7 +16,7 @@ import { Order } from "../models/order";
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 0.5 * 60;
+const EXPIRATION_WINDOW_SECONDS = 5 * 60;
 
 router.post(
   "/api/orders",
