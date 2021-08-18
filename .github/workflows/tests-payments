@@ -10,4 +10,4 @@ jobs:
         working-directory: ./ticketing
     steps:
       - uses: actions/checkout@v2
-      - run: cd payments && npm install && npm run test:ci
+      - run: cd payments && yarn && npm run test:ci
