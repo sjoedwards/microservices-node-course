@@ -1,0 +1,16 @@
+name: tests-tickets
+
+on:
+  pull_request:
+    paths:
+      - 'ticketing/tickets/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ticketing
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd tickets && yarn && npm run test:ci
