@@ -10,6 +10,9 @@ on:
 jobs:
   build: 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ticketing
     steps:
       - uses: actions/checkout@v2
       - run: cd auth && docker build -t sjoedwards1/auth .
