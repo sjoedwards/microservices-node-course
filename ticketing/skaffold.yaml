@@ -7,6 +7,7 @@ deploy:
     # When skaffold is stopped, all the resources wil be removed
     manifests:
       - ./infra/k8s/*
+      - ./infra/k8s-dev/*
 build:
   #Local config
   local:
