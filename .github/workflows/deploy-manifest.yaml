@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'ticketing/auth/**'
+      - 'ticketing/infra/**'
 
 jobs:
   build: 
