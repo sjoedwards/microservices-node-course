@@ -24,7 +24,7 @@ export default TicketingApp;
 // Executes on the server side rendering process
 
 TicketingApp.getInitialProps = async (appContext) => {
-  // Because we've added getInitialProps this on _app, now we're not calling the one on page - we need to call it explcitly
+  // Because we've added getInitialProps this on _app, now we're not calling the one on page, we need to call it explcitly
   // However we're using getServerSide props so don't need to worry
   const client = await buildClient(appContext.ctx.req);
   const { data } = await client.get("/api/users/currentuser");
