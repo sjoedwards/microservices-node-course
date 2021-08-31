@@ -3,6 +3,7 @@ import axios from "axios";
 const buildClient = (req) => {
   if (typeof window === "undefined") {
     // on the server, we need to hit the service directly. The server has no idea what ticketing.dev is
+    console.log("base url:", process.env.baseURL);
     return axios.create({
       // Can only target ClusterIP directly if resources are in the same namespace
       // Need to ask the ingress controller directly
