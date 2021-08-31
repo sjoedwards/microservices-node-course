@@ -14,7 +14,7 @@ spec:
         app: payments
     spec:
       containers:
-        # Can be anything - just used for loggings
+        # Can be anything - just used for logging
         # TODO readiness probe - can do by setting up a http endpoint on another port
         # Which trys to connect to the database / nats server to ensure its up
         - name: payments
