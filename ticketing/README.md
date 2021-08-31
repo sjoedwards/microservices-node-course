@@ -1,5 +1,9 @@
 ## Hosted URL
 https://sjoedwards-ticketing-prod.xyz
+- Need to trigger a github deploy to create the cluster
+- Need to configure digital ocean so you can pay for the cluster
+- Need to add ingress nginx - see https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
+
 
 ## Quick start
 
