@@ -4,7 +4,7 @@ metadata:
   name: client-depl
 spec:
   replicas: 1
-  # Tells deployment how to find the pods to create
+  # Tells deployment how to find the pods to create!
   selector:
     matchLabels:
       app: client
