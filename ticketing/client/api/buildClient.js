@@ -7,8 +7,7 @@ const buildClient = (req) => {
       // Can only target ClusterIP directly if resources are in the same namespace
       // Need to ask the ingress controller directly
       //protocol://[service-name].[namespace].svc.[cluster-domain]/path
-      baseURL:
-        "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+      baseURL: process.env.BASE_URL,
       headers: req.headers,
     });
   } else {

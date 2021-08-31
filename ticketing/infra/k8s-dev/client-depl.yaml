@@ -17,6 +17,9 @@ spec:
         # Can be anything - just used for loggings
         - name: client
           image: sjoedwards1/client
+          env:
+            - name: BASE_URL
+              value: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 ---
 # Define the clusterIP
 apiVersion: v1

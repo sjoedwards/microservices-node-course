@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1
+  # Tells deployment how to find the pods to create!
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        # Can be anything - just used for loggings
+        - name: client
+          image: sjoedwards1/client
+          env:
+            - name: BASE_URL
+              value: http://sjoedwards-ticketing-prod.xyz/
+---
+# Define the clusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  # Don't define type - the default is the clusterIP service
+  selector:
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
