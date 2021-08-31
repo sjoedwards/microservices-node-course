@@ -1,3 +1,6 @@
+## Hosted URL
+https://sjoedwards-ticketing-prod.xyz
+
 ## Quick start
 
 Start docker for MAC and enable Kubernetes - restart docker
