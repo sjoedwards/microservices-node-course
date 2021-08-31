@@ -2,7 +2,8 @@
 https://sjoedwards-ticketing-prod.xyz
 - Need to trigger a github deploy to create the cluster
 - Need to configure digital ocean so you can pay for the cluster
-- Need to add ingress nginx - see https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
+- Need to add ingress nginx - see https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm (this creates a load balancer)
+- Need to make sure that the domain name is pointing to the load balancer in digital ocean
 
 
 ## Quick start
